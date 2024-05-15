@@ -1,38 +1,40 @@
 import { combineReducers } from "redux";
-import { TODO_ADD, TODO_ADD_ALL, TODO_DELETE, TODO_UPDATE_STATE } from "./actions";
+import { MENU_ADD_CATEGORY, MENU_ADD_DISH, MENU_ADD_ALL, MENU_DELETE_DISH, MENU_UPDATE_DISH } from "./actions";
 
-function todo(state = [], action) {
-	switch (action.type){
-		case TODO_ADD:
+function menu(state = [], action) {
+	switch (action.type) {
+		case MENU_ADD_CATEGORY:
 			return [
 				...state,
-				{
-					_id: action._id, 
-					name: action.name, 
-					description: action.description, 
-					done: false
+				{ id: action.id, name: action.name, dishes: [] }
+			];
+		case MENU_ADD_DISH:
+			return state.map(category => {
+				if (category.id === action.categoryId) {
+					return {
+						...category,
+						dishes: [...category.dishes, { id: action.id, name: action.name, grams: action.grams, price: action.price }]
+					};
 				}
-			]
-		case TODO_ADD_ALL:
-			return [
-				...action.todo_list
-			]
-		case TODO_DELETE:
-			return state.filter(function(task) {
-				return task._id !== action._id;
-			})
-		case TODO_UPDATE_STATE:
-			return state.map(function(task) {
-				if (task._id === action._id){
-					return {...task, done: !task.done}
-				}
-				return task
-			})
-		default: 
-			return state
+				return category;
+			});
+		case MENU_ADD_ALL:
+			return [...action.menu];
+		case MENU_DELETE_DISH:
+			return state.map(category => ({
+				...category,
+				dishes: category.dishes.filter(dish => dish.id !== action.id)
+			}));
+		case MENU_UPDATE_DISH:
+			return state.map(category => ({
+				...category,
+				dishes: category.dishes.map(dish => dish.id === action.id ? { ...dish, name: action.name, grams: action.grams, price: action.price } : dish)
+			}));
+		default:
+			return state;
 	}
 }
 
 export default combineReducers({
-	tasks: todo
+	menu
 });

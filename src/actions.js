@@ -1,21 +1,25 @@
-export const TODO_ADD = 'TODO_ADD'
-export const TODO_ADD_ALL = 'TODO_ADD_ALL'
-export const TODO_DELETE = 'TODO_DELETE'
-export const TODO_UPDATE_STATE = 'TODO_UPDATE_STATE'
+export const MENU_ADD_CATEGORY = 'MENU_ADD_CATEGORY';
+export const MENU_ADD_DISH = 'MENU_ADD_DISH';
+export const MENU_ADD_ALL = 'MENU_ADD_ALL';
+export const MENU_DELETE_DISH = 'MENU_DELETE_DISH';
+export const MENU_UPDATE_DISH = 'MENU_UPDATE_DISH';
 
-
-export function todoAdd(_id, name, description) {
-	return { type: TODO_ADD, _id, name, description }
+export function menuAddCategory(id, name) {
+	return { type: MENU_ADD_CATEGORY, id, name };
 }
 
-export function todoAddAll(todo_list) {
-	return { type: TODO_ADD_ALL, todo_list }
+export function menuAddDish(id, categoryId, name, grams, price) {
+	return { type: MENU_ADD_DISH, id, categoryId, name, grams, price };
 }
 
-export function todoDelete(_id) {
-	return { type: TODO_DELETE, _id }
+export function menuAddAll(menu) {
+	return { type: MENU_ADD_ALL, menu };
 }
 
-export function todoUpdateState(_id) {
-	return { type: TODO_UPDATE_STATE, _id }
+export function menuDeleteDish(id) {
+	return { type: MENU_DELETE_DISH, id };
+}
+
+export function menuUpdateDish(id, name, grams, price) {
+	return { type: MENU_UPDATE_DISH, id, name, grams, price };
 }
