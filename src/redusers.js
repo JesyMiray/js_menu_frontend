@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { MENU_ADD_CATEGORY, MENU_ADD_DISH, MENU_ADD_ALL, MENU_DELETE_DISH, MENU_UPDATE_DISH } from "./actions";
+import { MENU_ADD_CATEGORY, MENU_ADD_DISH, MENU_ADD_ALL, MENU_DELETE_DISH, MENU_UPDATE_DISH, MENU_DELETE_CATEGORY, MENU_UPDATE_CATEGORY } from "./actions";
 
 function menu(state = [], action) {
 	switch (action.type) {
@@ -18,6 +18,12 @@ function menu(state = [], action) {
 				}
 				return category;
 			});
+		case MENU_DELETE_CATEGORY:
+			return state.filter(category => category.id !== action.id);
+		case MENU_UPDATE_CATEGORY:
+			return state.map(category => 
+				category.id === action.id ? { ...category, name: action.name } : category
+			);
 		case MENU_ADD_ALL:
 			return [...action.menu];
 		case MENU_DELETE_DISH:

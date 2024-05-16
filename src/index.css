@@ -140,5 +140,31 @@ body {
 .form-label {
   font-size: 2rem; 
 }
+.category-title {
+  font-size: 2rem; 
+  font-weight: bold; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.category-actions {
+  display: flex;
+  gap: 0;
+}
+
+.btn-edit, .btn-delete {
+  color: #fff;
+  background-color: #473231;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.7rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  background-color: #2f1f1b;
+}
 

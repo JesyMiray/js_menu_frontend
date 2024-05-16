@@ -6,6 +6,7 @@ import MenuList from "./MenuList";
 import CategoryAdd from "./CategoryAdd";
 import DishAdd from "./DishAdd";
 import { menuAddAll } from "./actions";
+import CategoryEdit from "./CategoryEdit";
 
 class App extends React.Component {
 	componentDidMount() {
@@ -24,6 +25,7 @@ class App extends React.Component {
 								<Route path="/" element={<MenuList />} />
 								<Route path="/add-category" element={<CategoryAdd />} />
 								<Route path="/add-dish" element={<DishAdd />} />
+								<Route path="/edit-category/:id" element={<CategoryEdit />} />
 							</Routes>
 						</Router>
 					</Provider>
