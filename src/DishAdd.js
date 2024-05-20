@@ -75,10 +75,9 @@ class DishAddInner extends React.Component {
 							<select value={this.state.categoryId} onChange={this.onCategoryChange} className="form-control">
 								<option value="">Select Category</option>
 								{this.props.menu.map(category => {
-									const categoryId = category._id; // Используем _id
+									const categoryId = category._id; 
 									if (!categoryId) {
-										console.error('Category id is undefined:', category);
-										return null; // Пропускать категории без _id
+										return null; 
 									}
 									return (
 										<option key={categoryId} value={categoryId}>{category.name}</option>

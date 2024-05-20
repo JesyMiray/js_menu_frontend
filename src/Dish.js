@@ -76,7 +76,6 @@ class Dish extends React.Component {
 	}
 	
 	render() {
-		console.log("Dish props:", this.props);
 		if (this.state.editing) {
 			return (
 				<li className="list-group-item">

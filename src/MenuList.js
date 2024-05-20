@@ -29,12 +29,10 @@ class MenuList extends React.Component {
 							<div className="ps-content">
 								<ul className="list-group list-group-flush">
 									{this.props.menu.map(category => {
-										const categoryId = category._id; // Используем _id
+										const categoryId = category._id; 
 										if (!categoryId) {
-											console.error('Category id is undefined:', category);
-											return null; // Пропускать категории без _id
+											return null; 
 										}
-										console.log('Category Key:', categoryId);
 										return (
 											<li key={categoryId} className="list-group-item">
 												<div className="category-title">
@@ -46,12 +44,10 @@ class MenuList extends React.Component {
 												</div>
 												<ul className="list-group">
 													{category.dishes.map(dish => {
-														const dishId = dish._id; // Используем _id
+														const dishId = dish._id; 
 														if (!dishId) {
-															console.error('Dish id is undefined:', dish);
-															return null; // Пропускать блюда без _id
+															return null; 
 														}
-														console.log('Dish Key:', dishId);
 														return (
 															<Dish key={dishId} dish={dish} />
 														);
