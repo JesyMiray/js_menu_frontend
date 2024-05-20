@@ -24,11 +24,11 @@ class Dish extends React.Component {
 	onDeleteClick(e) {
 		e.preventDefault();
 		
-		fetch(`dishes/${this.props.dish.id}`, {
+		fetch(`dishes/${this.props.dish._id}`, {
 			method: "DELETE"
 		}).then((res) => {
 			if (res.status === 200) {
-				this.props.dispatch(menuDeleteDish(this.props.dish.id));
+				this.props.dispatch(menuDeleteDish(this.props.dish._id));
 			} else {
 				console.log("Not deleted");
 			}
@@ -55,7 +55,7 @@ class Dish extends React.Component {
 	onSaveClick(e) {
 		e.preventDefault();
 		
-		fetch(`dishes/${this.props.dish.id}`, {
+		fetch(`dishes/${this.props.dish._id}`, {
 			method: "PATCH",
 			body: JSON.stringify({
 				name: this.state.name,
@@ -67,7 +67,7 @@ class Dish extends React.Component {
 			}
 		}).then((res) => {
 			if (res.status === 200) {
-				this.props.dispatch(menuUpdateDish(this.props.dish.id, this.state.name, this.state.grams, this.state.price));
+				this.props.dispatch(menuUpdateDish(this.props.dish._id, this.state.name, this.state.grams, this.state.price));
 				this.setState({ editing: false });
 			} else {
 				console.log("Not updated");
@@ -76,6 +76,7 @@ class Dish extends React.Component {
 	}
 	
 	render() {
+		console.log("Dish props:", this.props);
 		if (this.state.editing) {
 			return (
 				<li className="list-group-item">

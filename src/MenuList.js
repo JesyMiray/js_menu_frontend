@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import Dish from "./Dish";
 
 class MenuList extends React.Component {
-	handleDeleteCategory = (id) => {
-		fetch(`/categories/${id}`, {
+	handleDeleteCategory = (_id) => {
+		fetch(`/categories/${_id}`, {
 			method: "DELETE",
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}).then((res) => res.json()).then(() => {
-			this.props.dispatch({ type: 'MENU_DELETE_CATEGORY', id });
+			this.props.dispatch({ type: 'MENU_DELETE_CATEGORY', _id });
 		});
 	}
 
@@ -28,22 +28,38 @@ class MenuList extends React.Component {
 						<div style={{ position: "static" }} className="ps ps--active-y">
 							<div className="ps-content">
 								<ul className="list-group list-group-flush">
-									{this.props.menu.map(category => (
-										<li key={category.id} className="list-group-item">
-											<div className="category-title">
-												{category.name}
-												<div className="category-actions">
-													<NavLink to={`/edit-category/${category.id}`} className="btn btn-edit">Edit</NavLink>
-													<button onClick={() => this.handleDeleteCategory(category.id)} className="btn btn-delete">Delete</button>
+									{this.props.menu.map(category => {
+										const categoryId = category._id; // Используем _id
+										if (!categoryId) {
+											console.error('Category id is undefined:', category);
+											return null; // Пропускать категории без _id
+										}
+										console.log('Category Key:', categoryId);
+										return (
+											<li key={categoryId} className="list-group-item">
+												<div className="category-title">
+													{category.name}
+													<div className="category-actions">
+														<NavLink to={`/edit-category/${categoryId}`} className="btn btn-edit">Edit</NavLink>
+														<button onClick={() => this.handleDeleteCategory(categoryId)} className="btn btn-delete">Delete</button>
+													</div>
 												</div>
-											</div>
-											<ul className="list-group">
-												{category.dishes.map(dish => (
-													<Dish key={dish.id} dish={dish} />
-												))}
-											</ul>
-										</li>
-									))}
+												<ul className="list-group">
+													{category.dishes.map(dish => {
+														const dishId = dish._id; // Используем _id
+														if (!dishId) {
+															console.error('Dish id is undefined:', dish);
+															return null; // Пропускать блюда без _id
+														}
+														console.log('Dish Key:', dishId);
+														return (
+															<Dish key={dishId} dish={dish} />
+														);
+													})}
+												</ul>
+											</li>
+										);
+									})}
 								</ul>
 							</div>
 						</div>

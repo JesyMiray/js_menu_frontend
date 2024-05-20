@@ -56,7 +56,7 @@ class DishAddInner extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		}).then((res) => res.json()).then((data) => {
-			this.props.dispatch(menuAddDish(data.id, data.categoryId, data.name, data.grams, data.price));
+			this.props.dispatch(menuAddDish(data._id, data.categoryId, data.name, data.grams, data.price)); // Используем _id
 			this.props.history('/');
 		});
 	}
@@ -74,9 +74,16 @@ class DishAddInner extends React.Component {
 						<div className="widget-content-wrapper">
 							<select value={this.state.categoryId} onChange={this.onCategoryChange} className="form-control">
 								<option value="">Select Category</option>
-								{this.props.menu.map(category => (
-									<option key={category.id} value={category.id}>{category.name}</option>
-								))}
+								{this.props.menu.map(category => {
+									const categoryId = category._id; // Используем _id
+									if (!categoryId) {
+										console.error('Category id is undefined:', category);
+										return null; // Пропускать категории без _id
+									}
+									return (
+										<option key={categoryId} value={categoryId}>{category.name}</option>
+									);
+								})}
 							</select>
 							<input type="text" value={this.state.name} onChange={this.onNameChange} placeholder="Dish Name" className="form-control" />
 							<input type="text" value={this.state.grams} onChange={this.onGramsChange} placeholder="Grams" className="form-control" />

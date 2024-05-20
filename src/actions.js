@@ -6,29 +6,30 @@ export const MENU_UPDATE_DISH = 'MENU_UPDATE_DISH';
 export const MENU_DELETE_CATEGORY = 'MENU_DELETE_CATEGORY';
 export const MENU_UPDATE_CATEGORY = 'MENU_UPDATE_CATEGORY';
 
-export function menuAddCategory(id, name) {
-	return { type: MENU_ADD_CATEGORY, id, name };
+export function menuAddCategory(_id, name) {
+	return { type: MENU_ADD_CATEGORY, _id, name };
 }
 
-export function menuAddDish(id, categoryId, name, grams, price) {
-	return { type: MENU_ADD_DISH, id, categoryId, name, grams, price };
+export function menuAddDish(_id, categoryId, name, grams, price) {
+	return { type: MENU_ADD_DISH, _id, categoryId, name, grams, price };
 }
 
 export function menuAddAll(menu) {
 	return { type: MENU_ADD_ALL, menu };
 }
 
-export function menuDeleteDish(id) {
-	return { type: MENU_DELETE_DISH, id };
+export function menuDeleteDish(_id) {
+	return { type: MENU_DELETE_DISH, _id };
 }
 
-export function menuUpdateDish(id, name, grams, price) {
-	return { type: MENU_UPDATE_DISH, id, name, grams, price };
-}
-export function menuDeleteCategory(id) {
-	return { type: MENU_DELETE_CATEGORY, id };
+export function menuUpdateDish(_id, name, grams, price) {
+	return { type: MENU_UPDATE_DISH, _id, name, grams, price };
 }
 
-export function menuUpdateCategory(id, name) {
-	return { type: MENU_UPDATE_CATEGORY, id, name };
+export function menuDeleteCategory(_id) {
+	return { type: MENU_DELETE_CATEGORY, _id };
+}
+
+export function menuUpdateCategory(_id, name) {
+	return { type: MENU_UPDATE_CATEGORY, _id, name };
 }

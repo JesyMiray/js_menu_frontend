@@ -10,7 +10,7 @@ import CategoryEdit from "./CategoryEdit";
 
 class App extends React.Component {
 	componentDidMount() {
-		fetch("menu").then((res) => res.json()).then((data) => {
+		fetch("/menu").then((res) => res.json()).then((data) => {
 			this.props.dispatch(menuAddAll(data));
 		});
 	}
